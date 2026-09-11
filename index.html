@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard — S Mobile Pro</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+  body { padding-top: 40px; }
+  .admin-wrap { max-width: 1000px; margin: 0 auto; padding: 0 24px 80px; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 40px; }
+  th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--border); font-size: 0.85rem; }
+  th { color: var(--text-faint); font-weight: 600; }
+  .edit-price, .edit-stock { width: 90px; padding: 6px 8px; border-radius: 8px; border: 1px solid var(--border-strong); background: var(--surface); color: var(--text); }
+  .admin-section { margin-bottom: 50px; }
+  .admin-add-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(140px,1fr)); gap: 12px; }
+</style>
+</head>
+<body data-theme="dark">
+
+<div class="admin-wrap">
+  <a href="../index.html" style="color:var(--gold);font-size:0.85rem;">← Back to site</a>
+  <h1 style="margin-top:20px;">Admin Dashboard</h1>
+  <p>Manage inventory, view orders, and view registered users. Access is enforced by Firestore security rules — not by this page.</p>
+
+  <div id="adminGate" class="glass" style="padding:24px;margin-bottom:30px;"></div>
+  <div id="adminStatusMsg" class="form-msg"></div>
+
+  <div id="adminPanel" class="hidden">
+
+    <div class="admin-section">
+      <h2>Inventory</h2>
+      <table>
+        <thead><tr><th>Model</th><th>RAM/Storage</th><th>Wholesale (PKR)</th><th>Stock</th><th></th></tr></thead>
+        <tbody id="adminProductsBody"></tbody>
+      </table>
+
+      <h3>Add New Product</h3>
+      <form id="adminAddForm" class="admin-add-grid glass" style="padding:20px;">
+        <input name="brand" placeholder="Brand" required>
+        <input name="model" placeholder="Model" required>
+        <input name="ram" placeholder="RAM e.g. 8GB">
+        <input name="storage" placeholder="Storage e.g. 128GB">
+        <input name="price" type="number" placeholder="Wholesale PKR">
+        <input name="stock" type="number" placeholder="Stock qty">
+        <input name="image" placeholder="Image URL (optional)">
+        <button class="btn btn-primary" type="submit">Add Product</button>
+      </form>
+    </div>
+
+    <div class="admin-section">
+      <h2>Order Requests</h2>
+      <table>
+        <thead><tr><th>Name</th><th>Phone</th><th>Items</th><th>Subtotal</th><th>Status</th></tr></thead>
+        <tbody id="adminOrdersBody"></tbody>
+      </table>
+    </div>
+
+    <div class="admin-section">
+      <h2>Registered Users</h2>
+      <table>
+        <thead><tr><th>Name</th><th>Email</th><th>Role</th></tr></thead>
+        <tbody id="adminUsersBody"></tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+<script type="module">
+  import "../auth.js";
+</script>
+<script type="module" src="../admin.js"></script>
+</body>
+</html>
